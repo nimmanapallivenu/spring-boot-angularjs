@@ -1,2 +1,7 @@
 # spring-boot-angularjs
-spring-boot-angularjs project
+
+SpringBoot with RestAPI modules
+
+
+
+
