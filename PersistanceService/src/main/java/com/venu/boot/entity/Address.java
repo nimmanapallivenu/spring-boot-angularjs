@@ -37,6 +37,15 @@ public class Address implements Serializable {
 
 	}
 
+	public Address(Long id, String street, String city, String contry, long pincode) {
+		super();
+		this.id = id;
+		this.street = street;
+		this.city = city;
+		this.contry = contry;
+		this.pincode = pincode;
+	}
+
 	public String getStreet() {
 		return street;
 	}

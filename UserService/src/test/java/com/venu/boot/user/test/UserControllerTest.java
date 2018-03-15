@@ -68,7 +68,7 @@ public class UserControllerTest {
 	
 	
 	 @Test
-	    public void readSingleBookmark() throws Exception {
+	    public void getuser() throws Exception {
 	        mockMvc.perform(get("/user/" + user.getName()))
 	                .andExpect(status().isOk())
 	                .andExpect(content().contentType(contentType))

@@ -15,6 +15,18 @@ public class UserDTO {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
+	public UserDTO(long id, String name, String password, AddressDTO address) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.address = address;
+	}
+
+
+
 	public UserDTO(String name, String password, AddressDTO address) {
 		super();
 		this.name = name;

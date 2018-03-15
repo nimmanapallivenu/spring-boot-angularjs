@@ -3,8 +3,11 @@ package com.venu.boot.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.venu.boot.dto.AddressDTO;
 import com.venu.boot.dto.UserDTO;
@@ -13,16 +16,23 @@ import com.venu.boot.entity.UserDetails;
 import com.venu.boot.repo.UserRepository;
 import com.venu.boot.service.UserService;
 
+
 /**
  * @author venu.nimmanapalli
  *
  */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
-	@Autowired
+	
 	private UserRepository userRepository;
 
+	
+	 @Autowired
+	    public UserServiceImpl(final UserRepository repository) {
+	        this.userRepository = repository;
+	    }
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -51,6 +61,7 @@ public class UserServiceImpl implements UserService {
 	 * @see com.venu.boot.service.UserService#getUsers()
 	 */
 	@Override
+	@Transactional(readOnly = true)
 	public List<UserDTO> getUsers() {
 
 		List<UserDetails> userList = userRepository.findAll();
@@ -65,6 +76,7 @@ public class UserServiceImpl implements UserService {
 	 * @see com.venu.boot.service.UserService#getUser(java.lang.String)
 	 */
 	@Override
+	@Transactional(readOnly = true)
 	public UserDTO getUser(String name) {
 
 		UserDetails user = userRepository.findByName(name);
@@ -123,3 +135,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 }
+
+
+
+
+
+
+

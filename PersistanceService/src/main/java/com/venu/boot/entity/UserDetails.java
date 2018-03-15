@@ -19,7 +19,7 @@ public class UserDetails implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="USER_ID")
+	@Column(name = "USER_ID")
 	private long id;
 
 	@Column(name = "NAME", nullable = false, length = 100)
@@ -27,18 +27,23 @@ public class UserDetails implements Serializable {
 
 	@Column(name = "PASSWORD", nullable = false, length = 50)
 	private String password;
-	
-	@OneToOne(cascade=CascadeType.ALL)
+
+	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
-	
-	
 
 	public UserDetails() {
 		super();
 
 	}
 
-	
+	public UserDetails(long id, String name, String password, Address address) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.address = address;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -63,17 +68,12 @@ public class UserDetails implements Serializable {
 		this.password = password;
 	}
 
-
 	public Address getAddress() {
 		return address;
 	}
-
 
 	public void setAddress(Address address) {
 		this.address = address;
 	}
 
-	
-	
-	
 }
