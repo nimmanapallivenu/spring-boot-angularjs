@@ -24,7 +24,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.venu.boot.dto.AddressDTO;
 import com.venu.boot.dto.UserDTO;
 import com.venu.boot.service.UserService;
 import com.venu.boot.user.UserApplication;
@@ -61,20 +60,15 @@ public class UserControllerTest {
 	@Before
 	public void setup() throws Exception {
 		this.mockMvc = webAppContextSetup(webApplicationContext).build();
-		AddressDTO address = new AddressDTO("SIPCOT", "CHENNAI", "INDIA", 603103);
-		UserDTO userDto = new UserDTO("test", "password", address);
+		UserDTO userDto = new UserDTO("test", "password", "user@gmail.com", "SIPCOT", "CHENNAI", "INDIA", 603103);
 		this.user = userService.createUser(userDto);
 	}
-	
-	
-	 @Test
-	    public void getuser() throws Exception {
-	        mockMvc.perform(get("/user/" + user.getName()))
-	                .andExpect(status().isOk())
-	                .andExpect(content().contentType(contentType))
-	                .andExpect(jsonPath("$.name", is(user.getName())));
-	                
-	    }
-	
+
+	@Test
+	public void getuser() throws Exception {
+		mockMvc.perform(get("/user/" + user.getName())).andExpect(status().isOk())
+				.andExpect(content().contentType(contentType)).andExpect(jsonPath("$.name", is(user.getName())));
+
+	}
 
 }

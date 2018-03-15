@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.venu.boot.dto.UserDTO;
 import com.venu.boot.service.UserService;
+
 
 @RestController
 @RequestMapping(value = "/user")
@@ -31,20 +33,26 @@ public class UserController {
 		return userService.updateUser(userid, userDTO);
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public List<UserDTO> getUserList() {
 
 		return userService.getUsers();
 	}
 
-	@RequestMapping(value = "/{username}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/{username}", method = RequestMethod.GET)
 	public UserDTO getUserByName(@PathVariable(name="username") String username) {
 		return userService.getUser(username);
+	}*/
+	
+	@RequestMapping(value = "/{userid}", method = RequestMethod.GET)
+	public UserDTO getUserid(@PathVariable(name="userid") long userid) {
+		return userService.getUser(userid);
 	}
 
 	@RequestMapping(value = "/{userid}", method = RequestMethod.DELETE)
-	public void deleteUser(@PathVariable long userid) {
+	public boolean deleteUser(@PathVariable long userid) {
 		userService.deleteUser(userid);
+		return true;
 	}
 
 }

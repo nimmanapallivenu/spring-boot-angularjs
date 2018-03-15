@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 @EnableWebSecurity
@@ -28,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		super.configure(http);
 		
-		http.csrf().disable().authorizeRequests().antMatchers("/**").hasRole("ADMIN").
+		http.cors().and().csrf().disable().authorizeRequests().antMatchers("/**").hasRole("ADMIN").
 		and().httpBasic().realmName(REALM).authenticationEntryPoint(getBasicAuthEntryPoint()).and()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
@@ -44,5 +47,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		super.configure(web);
 		web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
 	}
+	
+	
+	@Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowCredentials(true);
+            }
+        };
+    }
+	
+	
 
 }
