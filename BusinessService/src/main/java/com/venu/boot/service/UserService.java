@@ -13,6 +13,8 @@ public interface UserService {
 	List<UserDTO> getUsers();
 
 	UserDTO getUser(String name);
+	
+	UserDTO getUser(long userid);
 
 	void deleteUser(long id);
 }

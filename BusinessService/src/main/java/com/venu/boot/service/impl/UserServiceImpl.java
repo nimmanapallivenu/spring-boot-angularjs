@@ -3,13 +3,10 @@ package com.venu.boot.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.venu.boot.dto.AddressDTO;
 import com.venu.boot.dto.UserDTO;
 import com.venu.boot.entity.Address;
 import com.venu.boot.entity.UserDetails;
@@ -82,7 +79,17 @@ public class UserServiceImpl implements UserService {
 		UserDetails user = userRepository.findByName(name);
 		return convertEntityToDto(user);
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public UserDTO getUser(long userid) {
+		UserDetails user = userRepository.findOne(userid);
+		return convertEntityToDto(user);
+	}
 
+
+
+	
 	/* (non-Javadoc)
 	 * @see com.venu.boot.service.UserService#deleteUser(long)
 	 */
@@ -103,12 +110,13 @@ public class UserServiceImpl implements UserService {
 
 		UserDetails userDetail = new UserDetails();
 		userDetail.setName(userDto.getName());
-		userDetail.setPassword(userDto.getPassword());
+		userDetail.setPassword(userDto.getPwd());
+		userDetail.setEmail(userDto.getEmail());
 		Address address = new Address();
-		address.setStreet(userDto.getAddress().getStreet());
-		address.setCity(userDto.getAddress().getCity());
-		address.setContry(userDto.getAddress().getContry());
-		address.setPincode(userDto.getAddress().getPincode());
+		address.setStreet(userDto.getStreet());
+		address.setCity(userDto.getCity());
+		address.setContry(userDto.getContry());
+		address.setPincode(userDto.getPincode());
 		userDetail.setAddress(address);
 		return userDetail;
 	}
@@ -124,13 +132,12 @@ public class UserServiceImpl implements UserService {
 		UserDTO userDto = new UserDTO();
 		userDto.setName(userDetails.getName());
 		userDto.setId(userDetails.getId());
-		AddressDTO address = new AddressDTO();
-		address.setId(userDetails.getAddress().getId());
-		address.setStreet(userDetails.getAddress().getStreet());
-		address.setCity(userDetails.getAddress().getCity());
-		address.setContry(userDetails.getAddress().getContry());
-		address.setPincode(userDetails.getAddress().getPincode());
-		userDto.setAddress(address);
+		userDto.setEmail(userDetails.getEmail());
+		userDto.setStreet(userDetails.getAddress().getStreet());
+		userDto.setCity(userDetails.getAddress().getCity());
+		userDto.setContry(userDetails.getAddress().getContry());
+		userDto.setPincode(userDetails.getAddress().getPincode());
+	
 		return userDto;
 	}
 

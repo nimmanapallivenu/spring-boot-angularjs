@@ -25,6 +25,9 @@ public class UserDetails implements Serializable {
 	@Column(name = "NAME", nullable = false, length = 100)
 	private String name;
 
+	@Column(name = "EMAIL", nullable = false, length = 150)
+	private String email;
+
 	@Column(name = "PASSWORD", nullable = false, length = 50)
 	private String password;
 
@@ -36,11 +39,12 @@ public class UserDetails implements Serializable {
 
 	}
 
-	public UserDetails(long id, String name, String password, Address address) {
+	public UserDetails(long id, String name, String password, String email, Address address) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.password = password;
+		this.email = email;
 		this.address = address;
 	}
 
@@ -74,6 +78,14 @@ public class UserDetails implements Serializable {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

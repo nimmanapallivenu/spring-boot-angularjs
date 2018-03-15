@@ -6,32 +6,46 @@ public class UserDTO {
 
 	private String name;
 
-	private String password;
+	private String email;
 
-	private AddressDTO address;
+	private String pwd;
+
+	private String street;
+
+	private String city;
+
+	private String contry;
+
+	private long pincode;
 
 	public UserDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-	public UserDTO(long id, String name, String password, AddressDTO address) {
+	public UserDTO(long id, String name, String email, String password, String street, String city, String contry,
+			long pincode) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.password = password;
-		this.address = address;
+		this.email = email;
+		this.pwd = password;
+		this.street = street;
+		this.city = city;
+		this.contry = contry;
+		this.pincode = pincode;
 	}
 
-
-
-	public UserDTO(String name, String password, AddressDTO address) {
+	public UserDTO(String name, String password,String email,  String street, String city, String contry,
+			long pincode) {
 		super();
 		this.name = name;
-		this.password = password;
-		this.address = address;
+		this.email = email;
+		this.pwd = password;
+		this.street = street;
+		this.city = city;
+		this.contry = contry;
+		this.pincode = pincode;
 	}
 
 	public long getId() {
@@ -50,20 +64,52 @@ public class UserDTO {
 		this.name = name;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPwd() {
+		return pwd;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPwd(String password) {
+		this.pwd = password;
 	}
 
-	public AddressDTO getAddress() {
-		return address;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAddress(AddressDTO address) {
-		this.address = address;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getContry() {
+		return contry;
+	}
+
+	public void setContry(String contry) {
+		this.contry = contry;
+	}
+
+	public long getPincode() {
+		return pincode;
+	}
+
+	public void setPincode(long pincode) {
+		this.pincode = pincode;
 	}
 
 }
